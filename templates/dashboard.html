@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda Gestión</title>
+</head>
+<body>
+
+    <h1>Tienda de Gestión</h1>
+
+    <pre>Buenas <strong>{{admin.title()}}</strong>, Bienvenido a <strong>{{tienda}}</strong>  |  {{fecha}}</pre>
+
+    <br><hr>
+
+    <h2>Catálogo de Productos</h2><hr>
+
+    <ul>
+        {% for producto in productos%}
+            <li>
+                <strong>Nombre: </strong> {{producto["nombre"]}}
+                <ul>
+
+                    <li><strong>Stock:</strong> {{producto["stock"] if producto["stock"] else "Agotado"}}</li>
+                    <li><strong>Precio:</strong> {{producto["precio"]}}€</li>
+                    <li><strong>Categoria:</strong> {{producto["categoria"]}}</li>
+                    <br>
+                </ul>
+            </li>
+        {% endfor %}
+            <li>
+                <strong>Total Stock:</strong> {{total}} productos están disponibles!
+            </li>
+    </ul>
+
+
+    <hr><h2>Clientes Registrados</h2><hr>
+
+
+    <ul>
+        {% for cliente in clientes %}
+            <li>
+                <strong>Nombre: </strong> {{cliente["nombre"]}}
+                <ul>
+
+                    <li><strong>Email:</strong> {{cliente["email"]}}</li>
+                    <li><strong>Estado:</strong> {{"Activo" if cliente["activo"] else "Inactivo" }}</li>
+                    <li><strong>Pedidos:</strong> {{cliente["pedidos"]}}</li>
+                    <br>
+                </ul>
+            </li>
+        {% endfor %}
+
+        <li>
+            Ahora mismo hay <strong>{{activos}} clientes</strong> activos!
+        </li>
+        <li>
+            <strong>{{cliente_max_pedidos}}</strong> es el cliente con mayor número de pedidos!
+        </li>
+    </ul>
+
+    <hr><h2>Pedidos Recientes</h2><hr>
+
+    <ul>
+        {% for pedido in pedidos %}
+            <li>
+                <strong>Cliente: </strong> {{pedido["cliente"]}}
+                <ul>
+                    <li><strong>Total:</strong> {{pedido["total"]}}€</li>
+                    <li><strong>Fecha:</strong> {{pedido["fecha"]}}</li><br>
+                </ul>
+            </li>
+        {% endfor %}
+
+        <li>
+            El ingreso total es de: <strong>{{ingreso_total}}€</strong>
+        </li>
+    </ul>
+</body>
+</html>
