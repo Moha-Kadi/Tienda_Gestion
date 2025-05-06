@@ -3,77 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <title>Tienda Gestión</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #4CAF50;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        pre {
+            background-color: #e8f5e9;
+            padding: 10px;
+            border-left: 4px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul > li {
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        ul > li > ul {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        ul > li > ul > li {
+            margin-bottom: 5px;
+        }
+
+        strong {
+            color: #2e7d32;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background-color: #ddd;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+        }
+
+        .agotado {
+                color: red;
+                font-weight: bold;
+        }
+
+        .grid-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 20px;
+                margin-top: 20px;
+        }
+
+        .card {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                border: 1px solid #ddd;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .Bienvenida {
+                text-align: center;
+        }
+
+    </style>
+
+
 </head>
 <body>
 
     <h1>Tienda de Gestión</h1>
 
-    <pre>Buenas <strong>{{admin.title()}}</strong>, Bienvenido a <strong>{{tienda}}</strong>  |  {{fecha}}</pre>
+    <pre class="Bienvenida">Buenas <strong>{{admin.title()}}</strong>, Bienvenido a <strong>{{tienda}}</strong>  |  {{fecha}}</pre>
 
-    <br><hr>
+    <hr>
 
-    <h2>Catálogo de Productos</h2><hr>
+    <div class="grid-container">
+        <div class="card">
+            <h2>Catálogo de Productos</h2><hr>
+            <ul>
+                {% for producto in productos%}
+                    <li>
+                        <strong>Nombre: </strong> {{producto["nombre"]}}
+                        <ul>
+                            <li><strong>Stock:</strong>
+                                {% if producto["stock"] %}
+                                    {{producto["stock"]}}
+                                {% else %}
+                                    <span class="agotado">Agotado</span>
+                                {% endif %}
+                            </li>
+                            <li><strong>Precio:</strong> {{producto["precio"]}}€</li>
+                            <li><strong>Categoria:</strong> {{producto["categoria"]}}</li>
+                        </ul>
+                    </li>
+                {% endfor %}
+                <li>
+                    <strong>Total Stock:</strong> {{total}} productos están disponibles!
+                </li>
+            </ul>
+        </div>
 
-    <ul>
-        {% for producto in productos%}
-            <li>
-                <strong>Nombre: </strong> {{producto["nombre"]}}
-                <ul>
 
-                    <li><strong>Stock:</strong> {{producto["stock"] if producto["stock"] else "Agotado"}}</li>
-                    <li><strong>Precio:</strong> {{producto["precio"]}}€</li>
-                    <li><strong>Categoria:</strong> {{producto["categoria"]}}</li>
-                    <br>
-                </ul>
-            </li>
-        {% endfor %}
-            <li>
-                <strong>Total Stock:</strong> {{total}} productos están disponibles!
-            </li>
-    </ul>
+        <div class="card">
+            <h2>Clientes Registrados</h2><hr>
+            <ul>
+                {% for cliente in clientes %}
+                    <li>
+                        <strong>Nombre: </strong> {{cliente["nombre"]}}
+                        <ul>
+                            <li><strong>Email:</strong> {{cliente["email"]}}</li>
+                            <li><strong>Estado:</strong> {{"Activo" if cliente["activo"] else "Inactivo" }}</li>
+                            <li><strong>Pedidos:</strong> {{cliente["pedidos"]}}</li>
+                        </ul>
+                    </li>
+                {% endfor %}
+
+                <li>
+                    Ahora mismo hay <strong>{{activos}} clientes</strong> activos!
+                </li>
+                <li>
+                    <strong>{{cliente_max_pedidos}}</strong> es el cliente con mayor número de pedidos!
+                </li>
+            </ul>
+        </div>
 
 
-    <hr><h2>Clientes Registrados</h2><hr>
+        <div class="card">
+            <h2>Pedidos Recientes</h2><hr>
+            <ul>
+                {% for pedido in pedidos %}
+                    <li>
+                        <strong>Cliente: </strong> {{pedido["cliente"]}}
+                        <ul>
+                            <li><strong>Total:</strong> {{pedido["total"]}}€</li>
+                            <li><strong>Fecha:</strong> {{pedido["fecha"]}}</li><br>
+                        </ul>
+                    </li>
+                {% endfor %}
+
+                <li>
+                    El ingreso total es de: <strong>{{ingreso_total}}€</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
 
 
-    <ul>
-        {% for cliente in clientes %}
-            <li>
-                <strong>Nombre: </strong> {{cliente["nombre"]}}
-                <ul>
-
-                    <li><strong>Email:</strong> {{cliente["email"]}}</li>
-                    <li><strong>Estado:</strong> {{"Activo" if cliente["activo"] else "Inactivo" }}</li>
-                    <li><strong>Pedidos:</strong> {{cliente["pedidos"]}}</li>
-                    <br>
-                </ul>
-            </li>
-        {% endfor %}
-
-        <li>
-            Ahora mismo hay <strong>{{activos}} clientes</strong> activos!
-        </li>
-        <li>
-            <strong>{{cliente_max_pedidos}}</strong> es el cliente con mayor número de pedidos!
-        </li>
-    </ul>
-
-    <hr><h2>Pedidos Recientes</h2><hr>
-
-    <ul>
-        {% for pedido in pedidos %}
-            <li>
-                <strong>Cliente: </strong> {{pedido["cliente"]}}
-                <ul>
-                    <li><strong>Total:</strong> {{pedido["total"]}}€</li>
-                    <li><strong>Fecha:</strong> {{pedido["fecha"]}}</li><br>
-                </ul>
-            </li>
-        {% endfor %}
-
-        <li>
-            El ingreso total es de: <strong>{{ingreso_total}}€</strong>
-        </li>
-    </ul>
 </body>
 </html>

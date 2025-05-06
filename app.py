@@ -95,17 +95,17 @@ def tienda_online():
     #   LISTAS PEDIDOS
     order = [
         {
-            "cliente":"Isa",
+            "cliente":client[0]["nombre"],
             "total": 103.98,
             "fecha": "28/04/2025"
         },
         {
-            "cliente": "Elvis",
+            "cliente":client[3]["nombre"],
             "total": 900.99,
             "fecha": "01/04/2025"
         },
         {
-            "cliente": "Alejandro",
+            "cliente":client[1]["nombre"],
             "total": 23.99,
             "fecha": "15/04/2025"
         },
