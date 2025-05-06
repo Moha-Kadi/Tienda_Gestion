@@ -21,10 +21,11 @@ TecnoMarket es una aplicación web basada en Flask para la gestión de una tiend
 ## Estructura del Proyecto
 ```
 Tienda_Gestion/
-├── app.py              # Archivo principal de la aplicación con rutas Flask y lógica de negocio
-├── templates/          # Plantillas HTML para la interfaz web
-│   └── dashboard.html  # Plantilla principal del panel de control
-└── README.md           # Documentación del proyecto
+├── app.py              # Aplicación principal de Flask
+├── requirements.txt    # Dependencias del proyecto (Flask 3.1.0, Jinja2 3.1.6)
+├── templates/         
+│   └── dashboard.html  # Plantilla HTML del panel de control con estilos CSS
+└── README.md          # Documentación del proyecto
 ```
 
 ## Cómo Ejecutar la Aplicación
