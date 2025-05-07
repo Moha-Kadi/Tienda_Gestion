@@ -43,7 +43,7 @@ Tienda_Gestion/
 
 4. Ejecuta la aplicación:
    ```
-   python app.py
+   python3 app.py
    ```
 
 5. Abre tu navegador web y ve a:
