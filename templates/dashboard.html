@@ -109,6 +109,13 @@
                 text-align: center;
         }
 
+        .card li:has(img)  {
+            text-align: center;
+        }
+        .card li img{
+            width: 150px;
+            border-radius: 10%;
+        }
     </style>
 
 
@@ -129,6 +136,7 @@
                     <li>
                         <strong>Nombre: </strong> {{producto["nombre"]}}
                         <ul>
+                            <li><strong>Precio:</strong> {{producto["precio"]}}€</li>
                             <li><strong>Stock:</strong>
                                 {% if producto["stock"] %}
                                     {{producto["stock"]}}
@@ -136,8 +144,8 @@
                                     <span class="agotado">Agotado</span>
                                 {% endif %}
                             </li>
-                            <li><strong>Precio:</strong> {{producto["precio"]}}€</li>
                             <li><strong>Categoria:</strong> {{producto["categoria"]}}</li>
+                            <li><img src="{{producto['img']}}" alt="Imagen de {{producto['nombre']}}" width="150"></li>
                         </ul>
                     </li>
                 {% endfor %}
@@ -158,6 +166,7 @@
                             <li><strong>Email:</strong> {{cliente["email"]}}</li>
                             <li><strong>Estado:</strong> {{"Activo" if cliente["activo"] else "Inactivo" }}</li>
                             <li><strong>Pedidos:</strong> {{cliente["pedidos"]}}</li>
+                            <li><img src="{{cliente['img']}}" alt="Foto de perfil {{cliente['nombre']}}"></li>
                         </ul>
                     </li>
                 {% endfor %}
@@ -181,6 +190,7 @@
                         <ul>
                             <li><strong>Total:</strong> {{pedido["total"]}}€</li>
                             <li><strong>Fecha:</strong> {{pedido["fecha"]}}</li><br>
+                            <li><img src="https://static.vecteezy.com/system/resources/previews/004/459/972/non_2x/shopping-cart-with-boxes-flat-linear-long-shadow-icon-line-symbol-vector.jpg" alt="Imagen Carrito" width="150"></li>
                         </ul>
                     </li>
                 {% endfor %}
