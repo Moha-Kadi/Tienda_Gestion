@@ -49,6 +49,13 @@ product = [
         "stock": 12,
         "categoria": "Consumo",
         "img":"https://imgs.search.brave.com/RgOQzlfsrj2wfE1CER70qXDBuw6UPG81uv0TaF1G6B0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9maW5v/ZmlsaXBpbm8ub3Jn/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDI1/LzA0L0FVbjFIMFku/anBlZw"
+    }, 
+    {
+        "nombre": "Caja Gipsy",
+        "precio": 129.99,
+        "stock": 6,
+        "categoria": "Gipsy Music",
+        "img":"https://www.laguitarreria.es/6860-large_default/cajon-flamenco-soy-gitana.jpg"
     },
 ]
 
@@ -81,6 +88,13 @@ client = [
         "activo": True,
         "pedidos": 8,
         "img":"https://c.pxhere.com/images/c6/91/441b53afa0a69dc4acfbb01dd205-1447095.jpg!d"
+    },
+    {
+        "nombre": "Churumbel",
+        "email": "churumbel@gmail.com",
+        "activo": False,
+        "pedidos": 1,
+        "img":"https://yt3.googleusercontent.com/0yWvElIEwMpCzjPpkras00OuHs3bU_iWhb9a8CpbSxhQIx16XG8UN2qIz9qJl3XThg3KqLUfcw=s160-c-k-c0x00ffffff-no-rj"
     }
 ]
 
@@ -99,8 +113,18 @@ order = [
     {
         "cliente":client[1]["nombre"],
         "total": 23.99,
-        "fecha": "15/04/2025"
+        "fecha": "01/05/2025"
     },
+    {
+        "cliente":client[2]["nombre"],
+        "total": 159.64,
+        "fecha": "22/04/2025"
+    },
+    {
+        "cliente":client[4]["nombre"],
+        "total": 129.99,
+        "fecha": "08/05/2025"
+    }
 ]
 
 #   ENDPOINT
