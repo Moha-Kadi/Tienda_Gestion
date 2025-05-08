@@ -116,6 +116,11 @@
             width: 150px;
             border-radius: 10%;
         }
+
+        a {
+            text-decoration: none;
+        }
+
     </style>
 
 
@@ -130,7 +135,8 @@
 
     <div class="grid-container">
         <div class="card">
-            <h2>Catálogo de Productos</h2><hr>
+            <h2>Catálogo de Productos <a href="./form"
+                >➕</a> </h2><hr>
             <ul>
                 {% for producto in productos%}
                     <li>

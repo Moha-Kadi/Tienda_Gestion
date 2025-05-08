@@ -59,28 +59,28 @@ client = [
         "email": "alejandro@gmail.com",
         "activo": False,
         "pedidos": 1,
-        "img":"https://imgs.search.brave.com/GTEVtYeMLk6OhXBkFgtAEpRsvGpWEjg-Y1AUF7gWdBI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk56WmhNRFZt/TWpJdFpHSXdZaTAw/TnpkaUxXSmtaamN0/TnpRNU16QTROamc0/TURCaFhrRXlYa0Zx/Y0djQC5qcGc"
+        "img":"https://labsaenzrenauld.com/wp-content/uploads/2020/10/Perfil-hombre-ba%CC%81sico_738242395.jpg"
     },
     {
         "nombre":"Maria",
         "email":"maria@gmail.com",
         "activo":True,
         "pedidos": 3,
-        "img":"https://i.pinimg.com/474x/e5/c8/46/e5c84688a1629fa1007bf561e0a609b3.jpg"
+        "img":"https://b2472105.smushcdn.com/2472105/wp-content/uploads/2023/09/Poses-Perfil-Profesional-Mujeres-ago.-10-2023-1-819x1024.jpg?lossy=1&strip=1&webp=1"
     },
     {
         "nombre":"Juanjo",
         "email":"juanjo@gmail.com",
         "activo":True,
         "pedidos": 5,
-        "img":"https://imgs.search.brave.com/fJ8FyVPAV1_1ONn-4TMLP0ZaI-rQDNuG_HbW4etA9r4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi8zLzNiL09i/aXNrXyVDNSVBMXBh/bnNrZWdhX3ByZWRz/ZWRuaWthX3ZsYWRl/X3ZfU2xvdmVuaWpp/XyUyODUzNjU4NjA1/OTMwJTI5XyUyOGNy/b3BwZWQlMjkuanBn/LzUxMnB4LU9iaXNr/XyVDNSVBMXBhbnNr/ZWdhX3ByZWRzZWRu/aWthX3ZsYWRlX3Zf/U2xvdmVuaWppXyUy/ODUzNjU4NjA1OTMw/JTI5XyUyOGNyb3Bw/ZWQlMjkuanBn"
+        "img":"https://upload.wikimedia.org/wikipedia/commons/2/24/Pedro_S%C3%A1nchez_in_2018d.jpg"
     },
     {
         "nombre": "Elvis",
         "email": "elvis@gmail.com",
         "activo": True,
         "pedidos": 8,
-        "img":"https://imgs.search.brave.com/wLPhT0jhWeoOi1C-DHNoGnWesiPwOy9JDDnaMWSbESg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk1qVTRNemMw/WW1RdFl6bGtOeTAw/WmpKa0xXRTJORGt0/Wm1NMU9XWm1PVEF5/T1RCbFhrRXlYa0Zx/Y0djQC5qcGc"
+        "img":"https://c.pxhere.com/images/c6/91/441b53afa0a69dc4acfbb01dd205-1447095.jpg!d"
     }
 ]
 
@@ -157,7 +157,7 @@ def form():
         
         product.append(diccionario)
 
-        return redirect(url_for("dashboard"))
+        return redirect("/dashboard")
 
     return render_template("formulario.html")
 
