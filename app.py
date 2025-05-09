@@ -1,9 +1,14 @@
 #   LIBRERÍAS
 import datetime
 from flask import Flask, render_template, request, redirect, url_for
+from pymongo import MongoClient
 
 app = Flask(__name__)
+cliente = MongoClient("mongodb+srv://mkadbri180:6E2xEEUMCHVkToTG@pythonmongodb.oqhrqsx.mongodb.net/?retryWrites=true&w=majority&appName=PythonMongoDB")
+app.db = cliente.PythonMongoDB  
 
+Usuarios = [usuario for usuario in app.db.Usuarios.find({})]
+print(Usuarios)
 
 #   DATOS
 #   INFORMACIÓN GENERAL
@@ -128,10 +133,6 @@ order = [
 ]
 
 #   ENDPOINT
-@app.route("/")
-def home():
-    return redirect(url_for("dashboard"))
-
 @app.route("/dashboard")
 #   FUNCIÓN DEL ENDPOINT
 def dashboard():
@@ -184,6 +185,32 @@ def form():
         return redirect("/dashboard")
 
     return render_template("formulario.html")
+
+
+@app.route("/add_user", methods = ["GET", "POST"])
+def usuario():
+    if request.method == "POST":
+        
+        nombre = request.form["nombre"]
+        precio = f'{float(request.form["precio"]):.2f}'
+        stock = int(request.form["stock"])
+        categoria = request.form["categoria"]
+        imagen = request.form["imagen"]
+
+        diccionario = {
+            "nombre":nombre,
+            "precio":precio,
+            "stock":stock,
+            "categoria":categoria,
+            "img":imagen
+            }
+        
+        product.append(diccionario)
+
+        return redirect("/dashboard")
+
+    return render_template("form_users.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
