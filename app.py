@@ -4,11 +4,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 
 app = Flask(__name__)
-cliente = MongoClient("mongodb+srv://mkadbri180:6E2xEEUMCHVkToTG@pythonmongodb.oqhrqsx.mongodb.net/?retryWrites=true&w=majority&appName=PythonMongoDB")
-app.db = cliente.PythonMongoDB  
+mongo = MongoClient("mongodb+srv://mkadbri180:6E2xEEUMCHVkToTG@pythonmongodb.oqhrqsx.mongodb.net/?retryWrites=true&w=majority&appName=PythonMongoDB")
+app.db = mongo.PythonMongoDB  
 
-Usuarios = [usuario for usuario in app.db.Usuarios.find({})]
-print(Usuarios)
+Productos = [producto for producto in app.db.Productos.find({})]
+
 
 #   DATOS
 #   INFORMACIÓN GENERAL
@@ -18,51 +18,51 @@ info_general = {
     "fecha": datetime.date.today()
 }
 
-    #   LISTA PRODUCTOS
-product = [
-    {
-        "nombre":"Gorra MilfShakes",
-        "precio":23.99,
-        "stock": 25,
-        "categoria":"Ropa",
-        "img":"https://milfshakes.es/cdn/shop/files/680e407e46b184b1ba1bc47c_Frontal-gorra.webp?v=1745764983"
-        },
-    {
-        "nombre": "Iphone 13",
-        "precio": 780,
-        "stock": 7,
-        "categoria": "Electrónica",
-        "img":"https://res-1.cloudinary.com/grover/image/upload/v1632242422/e4vsrkuyzzlspnwtxbvj.png"
-    },
-    {
-        "nombre": "Sudadera Stussy",
-        "precio": 79.99,
-        "stock": 0,
-        "categoria": "Ropa",
-        "img":"https://images.cults3d.com/mkigXOcrjp2dXsiwzP3kGcmLdHA=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/28951487/illustration-file/84b8c090-3dc2-4175-9a09-95ac4a893e49/Capture-d'%C3%A9cran-2023-10-27-170127.png"
-    },
-    {
-        "nombre": "AirPods Pro 2",
-        "precio": 120.99,
-        "stock": 12,
-        "categoria": "Electrónica",
-        "img":"https://m.media-amazon.com/images/I/51R8U4qEfAL.jpg"
-    },
-    {
-        "nombre": "Caja Segarros",
-        "precio": 5.66,
-        "stock": 12,
-        "categoria": "Consumo",
-        "img":"https://imgs.search.brave.com/RgOQzlfsrj2wfE1CER70qXDBuw6UPG81uv0TaF1G6B0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9maW5v/ZmlsaXBpbm8ub3Jn/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDI1/LzA0L0FVbjFIMFku/anBlZw"
-    }, 
-    {
-        "nombre": "Caja Gipsy",
-        "precio": 129.99,
-        "stock": 6,
-        "categoria": "Gipsy Music",
-        "img":"https://www.laguitarreria.es/6860-large_default/cajon-flamenco-soy-gitana.jpg"
-    },
-]
+# #   LISTA PRODUCTOS
+# product = [
+#     {
+#         "nombre":"Gorra MilfShakes",
+#         "precio":23.99,
+#         "stock": 25,
+#         "categoria":"Ropa",
+#         "img":"https://milfshakes.es/cdn/shop/files/680e407e46b184b1ba1bc47c_Frontal-gorra.webp?v=1745764983"
+#         },
+#     {
+#         "nombre": "Iphone 13",
+#         "precio": 780,
+#         "stock": 7,
+#         "categoria": "Electrónica",
+#         "img":"https://res-1.cloudinary.com/grover/image/upload/v1632242422/e4vsrkuyzzlspnwtxbvj.png"
+#     },
+#     {
+#         "nombre": "Sudadera Stussy",
+#         "precio": 79.99,
+#         "stock": 0,
+#         "categoria": "Ropa",
+#         "img":"https://images.cults3d.com/mkigXOcrjp2dXsiwzP3kGcmLdHA=/516x516/filters:no_upscale()/https://fbi.cults3d.com/uploaders/28951487/illustration-file/84b8c090-3dc2-4175-9a09-95ac4a893e49/Capture-d'%C3%A9cran-2023-10-27-170127.png"
+#     },
+#     {
+#         "nombre": "AirPods Pro 2",
+#         "precio": 120.99,
+#         "stock": 12,
+#         "categoria": "Electrónica",
+#         "img":"https://m.media-amazon.com/images/I/51R8U4qEfAL.jpg"
+#     },
+#     {
+#         "nombre": "Caja Segarros",
+#         "precio": 5.66,
+#         "stock": 12,
+#         "categoria": "Consumo",
+#         "img":"https://imgs.search.brave.com/RgOQzlfsrj2wfE1CER70qXDBuw6UPG81uv0TaF1G6B0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9maW5v/ZmlsaXBpbm8ub3Jn/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDI1/LzA0L0FVbjFIMFku/anBlZw"
+#     }, 
+#     {
+#         "nombre": "Caja Gipsy",
+#         "precio": 129.99,
+#         "stock": 6,
+#         "categoria": "Gipsy Music",
+#         "img":"https://www.laguitarreria.es/6860-large_default/cajon-flamenco-soy-gitana.jpg"
+#     },
+# ]
 
 #   LISTA CLIENTES
 client = [
@@ -133,13 +133,18 @@ order = [
 ]
 
 #   ENDPOINT
+@app.route("/")
+def home():
+    return redirect("/dashboard")
+
+#   ENDPOINT
 @app.route("/dashboard")
 #   FUNCIÓN DEL ENDPOINT
 def dashboard():
 
     #   NÚMERO TOTAL DE PRODUCTOS EN STOCK
     total_stock = 0
-    for total in product:
+    for total in Productos:
         total_stock += total["stock"]
 
     #   NÚMERO DE CLIENTES ACTIVOS
@@ -160,7 +165,7 @@ def dashboard():
     for pedido in order:
         total_ingreso += pedido["total"]
 
-    return render_template("dashboard.html", **info_general, productos=product, total = total_stock , clientes=client, activos = clientes_activos, cliente_max_pedidos = nombre_cliente, pedidos=order, ingreso_total = total_ingreso)
+    return render_template("dashboard.html", **info_general, products=Productos, total = total_stock , clientes=client, activos = clientes_activos, cliente_max_pedidos = nombre_cliente, pedidos=order, ingreso_total = total_ingreso)
 
 @app.route("/form", methods = ["GET", "POST"])
 def form():
@@ -172,7 +177,7 @@ def form():
         categoria = request.form["categoria"]
         imagen = request.form["imagen"]
 
-        diccionario = {
+        parametros = {
             "nombre":nombre,
             "precio":precio,
             "stock":stock,
@@ -180,37 +185,14 @@ def form():
             "img":imagen
             }
         
-        product.append(diccionario)
+        Productos.append(parametros)
+        app.db.Productos.insert_one(parametros)
+        print(Productos)
+        
 
         return redirect("/dashboard")
 
     return render_template("formulario.html")
-
-
-@app.route("/add_user", methods = ["GET", "POST"])
-def usuario():
-    if request.method == "POST":
-        
-        nombre = request.form["nombre"]
-        precio = f'{float(request.form["precio"]):.2f}'
-        stock = int(request.form["stock"])
-        categoria = request.form["categoria"]
-        imagen = request.form["imagen"]
-
-        diccionario = {
-            "nombre":nombre,
-            "precio":precio,
-            "stock":stock,
-            "categoria":categoria,
-            "img":imagen
-            }
-        
-        product.append(diccionario)
-
-        return redirect("/dashboard")
-
-    return render_template("form_users.html")
-
 
 if __name__ == "__main__":
     app.run(debug=True)
