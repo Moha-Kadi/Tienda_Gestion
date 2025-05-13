@@ -1,10 +1,12 @@
 #   LIBRERÍAS
 import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient
+from decouple import config
+URL_MONGO = config("ENLACE_DB", cast=str)
 
 app = Flask(__name__)
-mongo = MongoClient("mongodb+srv://mkadbri180:6E2xEEUMCHVkToTG@pythonmongodb.oqhrqsx.mongodb.net/?retryWrites=true&w=majority&appName=PythonMongoDB")
+mongo = MongoClient(URL_MONGO)
 app.db = mongo.PythonMongoDB  
 
 Productos = [producto for producto in app.db.Productos.find({})]
